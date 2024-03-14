@@ -27,6 +27,7 @@ document.querySelector(".back-btn").addEventListener("click", () => {
         musicIndex = 1;
     }
     renderMusic(musicIndex);
+    music.play();
 });
 document.querySelector(".next-btn").addEventListener("click", () => {
     musicIndex++;
@@ -34,6 +35,7 @@ document.querySelector(".next-btn").addEventListener("click", () => {
         musicIndex = 0;
     }
     renderMusic(musicIndex);
+    music.play();
 });
 
 function renderMusic(index) {
@@ -41,8 +43,8 @@ function renderMusic(index) {
     music.addEventListener("loadeddata", () => {
         songName.textContent = musicList[index].name;
         artistName.textContent = musicList[index].artist;
-        /*thumbnail.src = musicList[index].img;*/
-        thumbnail.setAttribute("src", musicList[index].img);
+        thumbnail.src = musicList[index].img;
+        /*thumbnail.setAttribute("src", musicList[index].img);*/
         musicDuration.textContent = secondsToMinutes(Math.floor(music.duration));
     });
 }
