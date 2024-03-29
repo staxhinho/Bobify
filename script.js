@@ -2,7 +2,8 @@ document.querySelector(".pause-btn").style.display = "none";
 
 var musicList = [
     {name:"Josh A - No Chill (Ft. MrTLexify)", artist:"Josh A (Ft. MrTLexify)", src:"music/Josh A - No Chill (Ft. MrTLexify).mp3", img:"img/Josh A - No Chill (Ft. MrTLexify).jpg"},
-    {name:"PARALISIA DO SONO! TEM UM BICHO NO MEU QUARTO!", artist: "D$ Luqi", src:"music/PARALISIA DO SONO! TEM UM BICHO NO MEU QUARTO!.mp3", img:"img/PARALISIA DO SONO! TEM UM BICHO NO MEU QUARTO!.jpg"}
+    {name:"PARALISIA DO SONO! TEM UM BICHO NO MEU QUARTO!", artist: "D$ Luqi", src:"music/PARALISIA DO SONO! TEM UM BICHO NO MEU QUARTO!.mp3", img:"img/PARALISIA DO SONO! TEM UM BICHO NO MEU QUARTO!.jpg"},
+    {name:"Яд", artist:"Erika Lundmoen", src:"music/Erika Lundmoen - Яд.mp3", img:"img/Erika-Lundmoen-Яд.jpg"}
 ];
 
 var music = document.querySelector("audio");
@@ -24,14 +25,14 @@ music.addEventListener("timeupdate", progressUpdate);
 document.querySelector(".back-btn").addEventListener("click", () => {
     musicIndex--;
     if (musicIndex < 0) {
-        musicIndex = 1;
+        musicIndex = 2;
     }
     renderMusic(musicIndex);
     music.play();
 });
 document.querySelector(".next-btn").addEventListener("click", () => {
     musicIndex++;
-    if (musicIndex > 1) {
+    if (musicIndex > 2) {
         musicIndex = 0;
     }
     renderMusic(musicIndex);
