@@ -9,4 +9,3 @@ function mousedown() {
         this.style.left = x;
     }
 }
-
