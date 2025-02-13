@@ -1,15 +1,15 @@
 document.querySelector(".pause-btn").style.display = "none";
 
-var musicList = [];
+let musicList = [];
 
-var music = document.querySelector("audio");
+let music = document.querySelector("audio");
 
-var musicIndex = 0;
+let musicIndex = 0;
 
-var musicDuration = document.querySelector(".end");
-var thumbnail = document.querySelector(".thumbnail");
-var songName = document.querySelector(".description h2");
-var artistName = document.querySelector(".description i");
+let musicDuration = document.querySelector(".end");
+let thumbnail = document.querySelector(".thumbnail");
+let songName = document.querySelector(".description h2");
+let artistName = document.querySelector(".description i");
 
 fetch ("../musics.json")
     .then(response => response.json())
@@ -30,7 +30,7 @@ document.querySelector(".back-btn").addEventListener("click", () => {
         musicIndex = musicList.length - 1;
     }
     renderMusic(musicIndex);
-    music.play();
+    playMusic();
 });
 document.querySelector(".next-btn").addEventListener("click", () => {
     musicIndex++;
@@ -38,7 +38,7 @@ document.querySelector(".next-btn").addEventListener("click", () => {
         musicIndex = 0;
     }
     renderMusic(musicIndex);
-    music.play();
+    playMusic();
 });
 
 function renderMusic(index) {
@@ -66,16 +66,16 @@ function pauseMusic() {
 }
 
 function progressUpdate() {
-    var bar = document.querySelector("progress");
+    let bar = document.querySelector("progress");
     bar.style.width = Math.floor((music.currentTime / music.duration) * 100) + "%";
 
-    var elapsedTime = document.querySelector(".start");
+    let elapsedTime = document.querySelector(".start");
     elapsedTime.textContent = secondsToMinutes(Math.floor(music.currentTime));
 }
 
 function secondsToMinutes(seconds){
-    var minutesField = Math.floor(seconds / 60);
-    var secondsField = seconds % 60;
+    let minutesField = Math.floor(seconds / 60);
+    let secondsField = seconds % 60;
     if (secondsField < 10) {
         secondsField = "0" + secondsField;
     }
