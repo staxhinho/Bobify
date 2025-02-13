@@ -1,21 +1,23 @@
 document.querySelector(".pause-btn").style.display = "none";
 
-var musicList = [
-    {name:"Josh A - No Chill (Ft. MrTLexify)", artist:"Josh A (Ft. MrTLexify)", src:"music/Josh A - No Chill (Ft. MrTLexify).mp3", img:"img/Josh A - No Chill (Ft. MrTLexify).jpg"},
-    {name:"PARALISIA DO SONO! TEM UM BICHO NO MEU QUARTO!", artist: "D$ Luqi", src:"music/PARALISIA DO SONO! TEM UM BICHO NO MEU QUARTO!.mp3", img:"img/PARALISIA DO SONO! TEM UM BICHO NO MEU QUARTO!.jpg"},
-    {name:"Яд", artist:"Erika Lundmoen", src:"music/Erika Lundmoen - Яд.mp3", img:"img/Erika-Lundmoen-Яд.jpg"}
-];
+let musicList = [];
 
-var music = document.querySelector("audio");
+let music = document.querySelector("audio");
 
-var musicIndex = 0;
+let musicIndex = 0;
 
-var musicDuration = document.querySelector(".end");
-var thumbnail = document.querySelector(".thumbnail");
-var songName = document.querySelector(".description h2");
-var artistName = document.querySelector(".description i");
+let musicDuration = document.querySelector(".end");
+let thumbnail = document.querySelector(".thumbnail");
+let songName = document.querySelector(".description h2");
+let artistName = document.querySelector(".description i");
 
-renderMusic(musicIndex);
+fetch ("../musics.json")
+    .then(response => response.json())
+    .then(data => {
+        musicList = data;
+        renderMusic(musicIndex);
+    })
+    .catch(error => console.error("Error loading music list:", error));
 
 document.querySelector(".play-btn").addEventListener("click", playMusic);
 document.querySelector(".pause-btn").addEventListener("click", pauseMusic);
@@ -25,27 +27,28 @@ music.addEventListener("timeupdate", progressUpdate);
 document.querySelector(".back-btn").addEventListener("click", () => {
     musicIndex--;
     if (musicIndex < 0) {
-        musicIndex = 2;
+        musicIndex = musicList.length - 1;
     }
     renderMusic(musicIndex);
-    music.play();
+    playMusic();
 });
 document.querySelector(".next-btn").addEventListener("click", () => {
     musicIndex++;
-    if (musicIndex > 2) {
+    if (musicIndex > musicList.length) {
         musicIndex = 0;
     }
     renderMusic(musicIndex);
-    music.play();
+    playMusic();
 });
 
 function renderMusic(index) {
+    if (musicList.length === 0) return;
+
     music.setAttribute("src", musicList[index].src);
     music.addEventListener("loadeddata", () => {
         songName.textContent = musicList[index].name;
         artistName.textContent = musicList[index].artist;
         thumbnail.src = musicList[index].img;
-        /*thumbnail.setAttribute("src", musicList[index].img);*/
         musicDuration.textContent = secondsToMinutes(Math.floor(music.duration));
     });
 }
@@ -63,16 +66,16 @@ function pauseMusic() {
 }
 
 function progressUpdate() {
-    var bar = document.querySelector("progress");
+    let bar = document.querySelector("progress");
     bar.style.width = Math.floor((music.currentTime / music.duration) * 100) + "%";
 
-    var elapsedTime = document.querySelector(".start");
+    let elapsedTime = document.querySelector(".start");
     elapsedTime.textContent = secondsToMinutes(Math.floor(music.currentTime));
 }
 
 function secondsToMinutes(seconds){
-    var minutesField = Math.floor(seconds / 60);
-    var secondsField = seconds % 60;
+    let minutesField = Math.floor(seconds / 60);
+    let secondsField = seconds % 60;
     if (secondsField < 10) {
         secondsField = "0" + secondsField;
     }
