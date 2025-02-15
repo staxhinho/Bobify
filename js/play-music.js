@@ -11,7 +11,7 @@ let thumbnail = document.querySelector(".thumbnail");
 let songName = document.querySelector(".description h2");
 let artistName = document.querySelector(".description i");
 
-fetch ("../musics.json")
+fetch ("../json/musics.json")
     .then(response => response.json())
     .then(data => {
         musicList = data;
