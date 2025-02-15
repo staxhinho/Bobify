@@ -1,8 +1,4 @@
 let musicPlaylist = document.getElementById("music-playlist");
-let musicPlayer = document.getElementById("music-player");
-
-musicPlaylist.style.display = "flex";
-musicPlayer.style.display = "none";
 
 // Fetch songs from JSON
 fetch("../json/musics.json")

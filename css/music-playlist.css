@@ -1,20 +1,15 @@
 #music-playlist{
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
-} 
+}
 
 h1 {
     color: #eee;
 }
 
 .song {
-<<<<<<< HEAD
-    margin-bottom: 5px;
-=======
->>>>>>> 4255f6ced679b71d55121367e3ed1982999e5cb5
+    margin-bottom: 8px;
     display: flex;
     align-items: center;
     font-size: 1.3rem;

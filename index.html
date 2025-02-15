@@ -13,7 +13,7 @@
 </head>
 <body>
     <div id="music-playlist">
-        <h1>Music List</h1>
+            <h1>Music List</h1>
     </div>
     <div id="music-player">
         <img class="thumbnail" src="img/Josh A - No Chill (Ft. MrTLexify).jpg" alt="A imagem não pode ser carregada">
@@ -39,8 +39,13 @@
         </div>
         <audio src="music/Josh A - No Chill (Ft. MrTLexify).flac"></audio>
     </div>
-    <script src="js/music-list.js" defer></script>
+    <div class="bottom-buttons">
+        <img src="img/buttons/play-btn.svg" alt="Home" onclick="PlayerBtn()" id="play-btn">
+        <img src="img/buttons/playlist-btn.svg" alt="Playlist" onclick="PlaylistBtn()" id="playlist-btn">
+    </div>
     <script src="js/play-music.js" defer></script>
     <script src="js/change-time.js" defer></script>
+    <script src="js/music-list.js" defer></script>
+    <script src="js/bottom-buttons.js" defer></script>
 </body>
 </html>
