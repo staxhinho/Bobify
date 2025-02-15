@@ -25,7 +25,7 @@ function displayMusicList() {
             </div>
         `;
         
-        musicPlaylist.appendChild(songDiv);
+        document.getElementById("song-list").appendChild(songDiv);
 
         document.querySelectorAll('.song-info p, .song-info i').forEach(text => {
             const parent = text.parentElement;

@@ -13,7 +13,13 @@
 </head>
 <body>
     <div id="music-playlist">
+        <div class="music-list">
             <h1>Music List</h1>
+            <div id="song-list"></div>
+        </div>
+        <div class="add-song">
+            <a href="html/songupload.html"><p>Upload a song</p></a>
+        </div>
     </div>
     <div id="music-player">
         <img class="thumbnail" src="img/Josh A - No Chill (Ft. MrTLexify).jpg" alt="A imagem não pode ser carregada">
@@ -39,6 +45,7 @@
         </div>
         <audio src="music/Josh A - No Chill (Ft. MrTLexify).flac"></audio>
     </div>
+    <hr>
     <div class="bottom-buttons">
         <img src="img/buttons/play-btn.svg" alt="Home" onclick="PlayerBtn()" id="play-btn">
         <img src="img/buttons/playlist-btn.svg" alt="Playlist" onclick="PlaylistBtn()" id="playlist-btn">
