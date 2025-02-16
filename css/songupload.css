@@ -2,5 +2,46 @@ html {
     background-color: #212121;
     margin: 0px;
     padding: 0px;
+    font-family: "Roboto", sans-serif;
 }
 
+h1 {
+    color: #eee;
+}
+
+p {
+    color: #eee;
+    font-size: 1.4rem;
+    margin: 14px 0px 14px 0px;
+}
+
+.top {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+}
+
+.top h1 {
+    margin: 0px;
+}
+
+.close {
+    display: flex;
+    justify-content: right;
+}
+
+#upload {
+    border: 2px solid #0c612c;
+    background-color: #1ed760;
+    border-radius: 25px;
+    width: fit-content;
+    margin-top: 10px;
+}
+
+#upload p {
+    text-decoration: none;
+    color: #eee;
+    margin: 8px 12px 8px 12px;
+    font-size: 1.3rem;
+    font-weight: 500;
+}

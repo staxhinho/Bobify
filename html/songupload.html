@@ -8,13 +8,24 @@
     <title>Bobify</title>
 </head>
 <body>
-    <h1>Upload a song</h1>
+    <div class="top">
+        <h1>Upload a song</h1>
+        <div class="close">
+            <a href="../index.html"><img src="../img/buttons/close-btn.svg" alt="Close"></a>
+        </div>
+    </div>
     <p>Name</p>
-    <input type="text">
+    <input type="text" id="song-name">
     <p>Artist</p>
-    <input type="text">
+    <input type="text" id="song-artist">
     <p>Image</p>
-    <input type="file" name="" id="">
-    <p>Upload</p>
+    <input type="file" name="" id="song-thumb">
+    <p>File</p>
+    <p id="test"></p>
+    <input type="file" name="" id="song-mp3">
+    <div id="upload" onclick="UploadSong()">
+        <p>Upload</p>
+    </div>
+    <script src="../js/upload-song.js" defer></script>
 </body>
 </html>
