@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+html {
+    background-color: #212121;
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    height: 100dvh;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.bottom-buttons {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.bottom-buttons img {
+    width: 65px;
+    height: auto;
+}
+
+hr {
+    width: 99vw;
+    color: #eee;
+    padding: 0px;
+}
