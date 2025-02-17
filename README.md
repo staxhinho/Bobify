@@ -2,10 +2,35 @@
 
 Bobify is a simple music player.
 
-<img src="./img/Screenshot.jpg" alt="Screenshot"></img>
+<div class="showing-images" display="flex" flex-direction="column" gap="10px">
+    <img src="./img/screenshots/Desktop-Player.jpg" alt="Desktop Player"></img>
+    <div class="mobile-images" display="flex" gap="1.5%">
+        <img src="./img/screenshots/Mobile-Player.jpg" alt="Mobile Player" width="49.75%" height="auto"></img>
+        <img src="./img/screenshots/Mobile-List.jpg" alt="Mobile List" width="49.75%" height="auto"></img>
+    </div>
+    <img src="./img/screenshots/Desktop-List.jpg" alt="Desktop List"></img>
+</div>
 
-## Using
+<details>
+  <summary><h2>⚙️ Running locally for development</h2></summary>
 
-Start a server so that the Json file can be fetched.
+Start cloning Bobify:
 
-If you don't know how to do it you can simply use <a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer">Live server</a> extension for Visual Studio Code.
+```
+git clone https://github.com/staxhinho/Bobify.git
+```
+
+
+Next, install its dependencies (make sure npm is installed on your machine):
+
+```
+npm install
+```
+
+To start, run:
+
+```
+npm start
+```
+
+</details>
