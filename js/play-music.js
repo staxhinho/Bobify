@@ -1,4 +1,6 @@
 document.querySelector(".pause-btn").style.display = "none";
+document.querySelector(".play-btn").addEventListener("click", playMusic);
+document.querySelector(".pause-btn").addEventListener("click", pauseMusic);
 
 let musicList = [];
 
@@ -11,18 +13,23 @@ let thumbnail = document.querySelector(".thumbnail");
 let songName = document.querySelector(".description h2");
 let artistName = document.querySelector(".description i");
 
-fetch ("../json/musics.json")
-    .then(response => response.json())
-    .then(data => {
+music.addEventListener("timeupdate", progressUpdate);
+
+async function loadJson() {
+    try {
+        const response = await fetch('../json/musics.json');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
         musicList = data;
         renderMusic(musicIndex);
-    })
-    .catch(error => console.error("Error loading music list:", error));
+    } catch (error) {
+        console.error('Error loading JSON file:', error);
+    }
+}
 
-document.querySelector(".play-btn").addEventListener("click", playMusic);
-document.querySelector(".pause-btn").addEventListener("click", pauseMusic);
-
-music.addEventListener("timeupdate", progressUpdate);
+loadJson();
 
 document.querySelector(".back-btn").addEventListener("click", () => {
     musicIndex--;

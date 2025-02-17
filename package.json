@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/staxhinho/Bobify#readme",
   "dependencies": {
-    "express": "^4.21.2"
+    "connect-livereload": "^0.6.1",
+    "express": "^4.21.2",
+    "livereload": "^0.9.3"
   }
 }

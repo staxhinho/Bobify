@@ -43,15 +43,11 @@ h1 {
 }
 
 .song-info p {
-    margin: 0;
     color: #eee;
-    display: inline-block;
 }
 
 .song-info i {
-    margin: 0;
     color: gray;
-    display: inline-block;
 }
 
 .add-song {
@@ -72,11 +68,21 @@ h1 {
     color: inherit;
 }
 
+.song-info p, .song-info i {
+    margin: 0;
+    display: inline-block;
+    white-space: nowrap;
+}
+
 @keyframes scrollText {
     0% {
-        transform: translateX(20%);
+        transform: translateX(100%); /* Start from the right */
     }
     100% {
-        transform: translateX(-140%);
+        transform: translateX(-100%); /* End at the left */
     }
+}
+
+.scroll-animation {
+    animation: scrollText 3s linear infinite;
 }
