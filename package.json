@@ -1,0 +1,25 @@
+{
+  "name": "bobify",
+  "version": "1.0.0",
+  "description": "Bobify is a simple music player.",
+  "main": "./index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/staxhinho/Bobify.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/staxhinho/Bobify/issues"
+  },
+  "homepage": "https://github.com/staxhinho/Bobify#readme",
+  "dependencies": {
+    "connect-livereload": "^0.6.1",
+    "express": "^4.21.2",
+    "livereload": "^0.9.3"
+  }
+}
