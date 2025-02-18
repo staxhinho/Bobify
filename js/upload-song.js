@@ -4,28 +4,55 @@ let songThumb = document.getElementById("song-thumb");
 let songFile = document.getElementById("song-mp3");
 let testbox = document.getElementById("test");
 
+musicList = [];
 
-
-fetch("../json/musics.json")
-    .then(response => response.json())
-    .then(data => {
+async function readJson() {
+    console.log("Loading music list...");
+    try {
+        const response = await fetch('/api/musics');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
         musicList = data;
-    })
-    .catch(error => console.error("Error loading music list:", error));
+    } catch (error) {
+        console.error('Error loading JSON file:', error);
+    }
+}
 
-function UploadSong() {
+readJson();
+
+async function addSong(formData) {
+    try {
+        const response = await fetch('/api/musics', {
+            method: 'PATCH',
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to add song');
+        }
+
+        const result = await response.json();
+        console.log(result.message, result.updatedSongs);
+    } catch (error) {
+        console.error('Error adding song:', error);
+    }
+}
+
+async function UploadSong() {
     /*if (!songName.value || !songArtist.value || !songThumb.files.length || !songFile.files.length) {
         alert("Please fill in all fields!");
         return;
     }*/
 
-    let newSong = {
-        name: songName.value,
-        //artist: songArtist.value,
-        //img: URL.createObjectURL(songThumb.files[0]), // Temporary image URL
-        //src: URL.createObjectURL(songFile.files[0])   // Temporary audio URL
-    };
+    console.log("clicked")
 
-    musicList.push(newSong);
-    console.log("Song uploaded:", newSong);
+    const formData = new FormData();
+    formData.append('songName', songName.value);
+    formData.append('songArtist', songArtist.value);
+    formData.append('songFile', songFile.files[0]);
+    formData.append('imageFile', songThumb.files[0]);
+
+    await addSong(formData);
 }

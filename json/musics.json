@@ -1,5 +1,20 @@
 [
-        {"name":"No Chill", "artist":"Josh A (Ft. MrTLexify)", "src":"music/Josh A - No Chill (Ft. MrTLexify).mp3", "img":"img/thumbnails/Josh A - No Chill (Ft. MrTLexify).jpg", "id": 1},
-        {"name":"PARALISIA DO SONO! TEM UM BICHO NO MEU QUARTO!", "artist": "D$ Luqi", "src":"music/PARALISIA DO SONO! TEM UM BICHO NO MEU QUARTO!.mp3", "img":"img/thumbnails/PARALISIA DO SONO! TEM UM BICHO NO MEU QUARTO!.jpg", "id": 2},
-        {"name":"Яд", "artist":"Erika Lundmoen", "src":"music/Erika Lundmoen - Яд.mp3", "img":"img/thumbnails/Erika-Lundmoen-Яд.jpg", "id": 3}
+  {
+    "name": "No Chill",
+    "artist": "Josh A (Ft. MrTLexify)",
+    "src": "music/Josh A - No Chill (Ft. MrTLexify).mp3",
+    "img": "img/thumbnails/Josh A - No Chill (Ft. MrTLexify).jpg"
+  },
+  {
+    "name": "PARALISIA DO SONO! TEM UM BICHO NO MEU QUARTO!",
+    "artist": "D$ Luqi",
+    "src": "music/PARALISIA DO SONO! TEM UM BICHO NO MEU QUARTO!.mp3",
+    "img": "img/thumbnails/PARALISIA DO SONO! TEM UM BICHO NO MEU QUARTO!.jpg"
+  },
+  {
+    "name": "Яд",
+    "artist": "Erika Lundmoen",
+    "src": "music/Erika Lundmoen - Яд.mp3",
+    "img": "img/thumbnails/Erika-Lundmoen-Яд.jpg"
+  }
 ]

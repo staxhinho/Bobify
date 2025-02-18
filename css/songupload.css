@@ -5,8 +5,15 @@ html {
     font-family: "Roboto", sans-serif;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 h1 {
     color: #eee;
+    margin: 0px;
 }
 
 p {
@@ -15,22 +22,18 @@ p {
     margin: 14px 0px 14px 0px;
 }
 
-.top {
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.bottom-buttons {
+    width: 300px;
     display: flex;
-    align-items: start;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
-.top h1 {
-    margin: 0px;
-}
-
-.close {
-    display: flex;
-    justify-content: right;
-}
-
-#upload {
+.bottom-button {
     border: 2px solid #0c612c;
     background-color: #1ed760;
     border-radius: 25px;
@@ -38,7 +41,12 @@ p {
     margin-top: 10px;
 }
 
-#upload p {
+.bottom-button:hover {
+    cursor: pointer;
+}
+
+
+.bottom-button p {
     text-decoration: none;
     color: #eee;
     margin: 8px 12px 8px 12px;
