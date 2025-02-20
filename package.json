@@ -5,7 +5,10 @@
   "main": "./index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ."
+    "start": "node .",
+    "build": "bobify build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
@@ -17,10 +20,13 @@
   "bugs": {
     "url": "https://github.com/staxhinho/Bobify/issues"
   },
-  "homepage": "https://github.com/staxhinho/Bobify#readme",
+  "homepage": "https://staxhinho.github.io/Bobify/",
   "dependencies": {
     "bobify": "file:",
     "express": "^4.21.2",
     "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
