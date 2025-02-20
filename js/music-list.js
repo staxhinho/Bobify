@@ -15,6 +15,8 @@ async function loadJson() {
     }
 }
 
+loadJson();
+
 function displayMusicList() {
     const songListDiv = document.getElementById("song-list");
     songListDiv.innerHTML = '';
@@ -67,5 +69,3 @@ function applyOverflowAnimation() {
         }
     });
 }
-
-loadJson();
