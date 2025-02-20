@@ -6,60 +6,68 @@ const multer = require('multer');
 const app = express();
 const port = 8497;
 
+// Storage for Audio Files
 const audioStorage = multer.diskStorage({
-    destination: function (req, file, cb) {
+    destination: async function (req, file, cb) {
         const uploadPath = path.join(__dirname, 'music');
-        fs.mkdir(uploadPath, { recursive: true }, (err) => cb(err, uploadPath)); // Ensure the music folder exists
+        await fs.mkdir(uploadPath, { recursive: true });
+        cb(null, uploadPath);
     },
     filename: function (req, file, cb) {
-        const fileExtension = path.extname(file.originalname);
-        cb(null, Date.now() + fileExtension); // Give a unique name based on timestamp
+        cb(null, Date.now() + path.extname(file.originalname));
     }
 });
 
+// Storage for Image Files
 const imageStorage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        const uploadPath = path.join(__dirname, 'img');
-        fs.mkdir(uploadPath, { recursive: true }, (err) => cb(err, uploadPath)); // Ensure the img folder exists
+    destination: async function (req, file, cb) {
+        const uploadPath = path.join(__dirname, 'img/thumbnails');
+        await fs.mkdir(uploadPath, { recursive: true });
+        cb(null, uploadPath);
     },
     filename: function (req, file, cb) {
-        const fileExtension = path.extname(file.originalname);
-        cb(null, Date.now() + fileExtension); // Give a unique name based on timestamp
+        cb(null, Date.now() + path.extname(file.originalname));
     }
 });
 
+// Multer upload instances
 const uploadAudio = multer({ storage: audioStorage });
 const uploadImage = multer({ storage: imageStorage });
 
+// Corrected uploadMulti using separate storage handlers
+const uploadMulti = multer({
+    storage: multer.diskStorage({
+        destination: function (req, file, cb) {
+            if (file.fieldname === "songFile") {
+                cb(null, path.join(__dirname, "music"));
+            } else if (file.fieldname === "imageFile") {
+                cb(null, path.join(__dirname, "img/thumbnails"));
+            } else {
+                cb(new Error("Invalid file fieldname"), null);
+            }
+        },
+        filename: function (req, file, cb) {
+            let safeName = req.body.name.replace(/[<>:"\/\\|?*]+/g, ""); // Remove invalid filename characters
+            let extension = path.extname(file.originalname);
+            cb(null, `${safeName}${extension}`);
+        }
+    })
+}).fields([
+    { name: 'songFile', maxCount: 1 },
+    { name: 'imageFile', maxCount: 1 }
+]);
+
+// Middleware
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "./")));
-app.use(express.static(path.join(__dirname, 'img')));
+app.use(express.static(path.join(__dirname, 'img/thumbnails')));
 app.use(express.static(path.join(__dirname, 'music')));
+app.use(express.urlencoded({ extended: true }));
 
 const jsonFilePath = path.join(__dirname, 'json', 'musics.json');
 
-app.get('/', (req, res) => {
-    readFile(path.join(__dirname, "./index.html"), "utf-8", (err, html) => {
-        if (err) {
-            res.status(500).send("sorry, out of order");
-        }
-
-        res.send(html);
-    });
-});
-
-app.get('/api/musics', async (req, res) => {
-    try {
-        const jsonData = await fs.readFile(jsonFilePath, 'utf-8');
-        const data = JSON.parse(jsonData);
-        res.json(data);
-    } catch (error) {
-        res.status(500).json({ error: 'Failed to read JSON file' });
-    }
-});
-
-// Use PATCH to upload song and image with separate handlers for each file type
-app.patch('/api/musics', uploadAudio.single('songFile'), uploadImage.single('imageFile'), async (req, res) => {
+// API Routes
+app.patch('/api/musics', uploadMulti, async (req, res) => {
     try {
         const jsonData = await fs.readFile(jsonFilePath, 'utf-8');
         let songs = JSON.parse(jsonData);
@@ -68,24 +76,22 @@ app.patch('/api/musics', uploadAudio.single('songFile'), uploadImage.single('ima
             throw new Error("JSON file is not an array.");
         }
 
-        // Get new song details from request
         const newSong = req.body;
+        let safeName = newSong.name.replace(/[<>:"\/\\|?*]+/g, ""); // Remove invalid characters
 
-        // Handle file uploads if they exist
-        if (req.file && req.file.fieldname === 'songFile') {
-            newSong.src = `/music/${req.file.filename}`; // Store the music file path in the JSON
+        // Assign uploaded file paths with song name
+        if (req.files['songFile']) {
+            newSong.src = `/music/${safeName}${path.extname(req.files['songFile'][0].originalname)}`;
+        }
+        if (req.files['imageFile']) {
+            newSong.img = `/img/thumbnails/${safeName}${path.extname(req.files['imageFile'][0].originalname)}`;
         }
 
-        if (req.imageFile && req.imageFile.fieldname === 'imageFile') {
-            newSong.img = `/img/${req.imageFile.filename}`; // Store the image file path in the JSON
-        }
-
-        // Validate the new song format
+        // Validate new song data
         if (!newSong || typeof newSong !== 'object') {
             return res.status(400).json({ error: "Invalid song format." });
         }
 
-        // Append the new song and write updated JSON file
         songs.push(newSong);
         await fs.writeFile(jsonFilePath, JSON.stringify(songs, null, 2), 'utf-8');
         
@@ -96,5 +102,5 @@ app.patch('/api/musics', uploadAudio.single('songFile'), uploadImage.single('ima
     }
 });
 
-
+// Start Server
 app.listen(port, () => console.log(`Bobify available on http://localhost:${port}`));

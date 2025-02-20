@@ -35,24 +35,30 @@ async function addSong(formData) {
 
         const result = await response.json();
         console.log(result.message, result.updatedSongs);
+        songAdded();
     } catch (error) {
         console.error('Error adding song:', error);
     }
 }
 
 async function UploadSong() {
-    /*if (!songName.value || !songArtist.value || !songThumb.files.length || !songFile.files.length) {
+    if (!songName.value || !songArtist.value || !songThumb.files.length || !songFile.files.length) {
         alert("Please fill in all fields!");
         return;
-    }*/
+    }
 
     console.log("clicked")
 
     const formData = new FormData();
-    formData.append('songName', songName.value);
-    formData.append('songArtist', songArtist.value);
+    formData.append('name', songName.value);
+    formData.append('artist', songArtist.value);
     formData.append('songFile', songFile.files[0]);
     formData.append('imageFile', songThumb.files[0]);
 
     await addSong(formData);
+}
+
+function songAdded() {
+    alert("Song added successfully!");
+    window.location.assign("../index.html");
 }
