@@ -4,7 +4,7 @@ const path = require("path");
 const multer = require('multer');
 
 const app = express();
-const port = 8497;
+const port = 3000;
 
 // Storage for Audio Files
 const audioStorage = multer.diskStorage({
