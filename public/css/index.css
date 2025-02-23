@@ -13,10 +13,12 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
 }
 
 .bottom-buttons {
     display: flex;
+    width: 400px;
     justify-content: space-evenly;
 }
 

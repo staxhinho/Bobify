@@ -101,6 +101,10 @@ app.patch('/api/musics', uploadMulti, async (req, res) => {
             return res.status(400).json({ error: "Invalid song format." });
         }
 
+        // Find the highest current ID and assign the next one
+        const lastId = songs.length > 0 ? Math.max(...songs.map(song => song.id)) : 0;
+        newSong.id = lastId + 1;
+
         songs.push(newSong);
         await fs.writeFile(jsonFilePath, JSON.stringify(songs, null, 2), 'utf-8');
 
